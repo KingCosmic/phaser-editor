@@ -1,0 +1,16 @@
+
+.container {
+  width: 14%;
+  background: #1C1C1E;
+}
+
+.title {
+  color: #E3E3E3;
+  font-weight: 200;
+  padding: 5px 10px;
+  font-size: 14px;
+}
+
+.openEditors {
+  border-bottom: 1px solid #101111;
+}

@@ -1,0 +1,101 @@
+
+.backdrop {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: #333333;
+  opacity: .6;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  width: auto;
+  height: auto;
+  padding: 20px;
+  border-radius: 5px;
+  background: #222;
+  box-shadow: 0 10px 20px 10px rgba(0, 0, 0, .2);
+}
+
+.group {
+  position: relative;
+  padding: 15px 0 0;
+}
+
+.creationInputs {
+  font-family: inherit;
+  width: 100%;
+  border: 0;
+  border-bottom: 2px solid #9b9b9b;
+  outline: 0;
+  font-size: 1.3rem;
+  color: #fff;
+  padding: 7px 0;
+  background: transparent;
+  transition: border-color 0.2s;
+}
+
+.creationInputs::placeholder {
+  color: transparent;
+}
+
+.creationInputs:placeholder-shown~.label {
+  font-size: 1.3rem;
+  cursor: text;
+  top: 20px;
+}
+
+.label {
+  position: absolute;
+  top: 0;
+  display: block;
+  transition: 0.2s;
+  font-size: 1rem;
+  color: #9b9b9b;
+}
+
+.creationInputs:focus {
+  padding-bottom: 6px;
+  border-width: 3px;
+  border-image: linear-gradient(to right, #11998e, #38ef7d);
+  border-image-slice: 1;
+}
+
+.creationInputs:focus~.label {
+  position: absolute;
+  top: 0;
+  display: block;
+  transition: 0.2s;
+  font-size: 1rem;
+  color: #11998e;
+  font-weight: 700;
+}
+
+/* reset input */
+
+.creationInputs:required {
+  box-shadow: none;
+}
+
+.creationInputs:invalid {
+  box-shadow: none;
+}
+
+.buttonContainer {
+  display: flex;
+  padding-top: 25px;
+  justify-content: space-between;
+}
+
+.button {
+  cursor: pointer;
+  padding: 10px;
+  border-radius: 4px;
+  border: 1px solid #fff;
+}

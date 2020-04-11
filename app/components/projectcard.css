@@ -1,0 +1,42 @@
+
+.container {
+  position: relative;
+  width: 20em;
+  padding: 15px;
+  border-radius: 4px;
+  background: #292929;
+  transition: all .3s ease-in-out;
+  cursor: pointer;
+  margin-right: 10px;
+  float: left;
+}
+
+.container:hover {
+  box-shadow: 0 10px 20px 10px rgba(0, 0, 0, .2);
+}
+
+.title {
+  margin: 0 0 .25em;
+  color: white;
+}
+
+.meta {
+  color: #999;
+}
+
+.arrow {
+  opacity: 0;
+  position: absolute;
+  right: 0;
+  top: 50%;
+  margin-top: -1em;
+  transform: translateX(-60%);
+  width: 2em;
+  height: 2em;
+  transition: all .3s ease-in-out;
+}
+
+.container:hover .arrow {
+  opacity: 1;
+  transform: translateX(-40%);
+}

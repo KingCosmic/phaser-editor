@@ -1,0 +1,25 @@
+
+.container {
+  width: 100vw;
+  height: 100vh;
+  padding: 10px;
+  background: #222;
+}
+
+
+.button {
+  background: #292929;
+  border-radius: 5px;
+  padding: 10px;
+
+  position: absolute;
+  bottom: 30px;
+  right: 30px;
+
+  transition: all .3s ease-in-out;
+  cursor: pointer;
+}
+
+.button:hover {
+  box-shadow: 0 10px 20px 10px rgba(0, 0, 0, .2);
+}

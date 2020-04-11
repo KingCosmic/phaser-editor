@@ -1,0 +1,11 @@
+
+.container {
+  color: #ACACAC;
+  cursor: pointer;
+  user-select: none;
+  padding: 5px 10px;
+}
+
+.container:hover {
+  color: #E3E3E3;
+}
