@@ -273,6 +273,7 @@
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.13.0",
     "@hot-loader/react-dom": "^16.13.0",
+    "codemirror": "^5.52.2",
     "core-js": "^3.6.4",
     "devtron": "^1.4.0",
     "electron-debug": "^3.0.1",
@@ -282,6 +283,7 @@
     "phaser": "^3.22.0",
     "phaser3-react": "^1.0.16",
     "react": "^16.12.0",
+    "react-codemirror2": "^7.1.0",
     "react-dom": "^16.12.0",
     "react-hot-loader": "^4.12.19",
     "react-router-dom": "^5.1.2",
