@@ -1,4 +1,5 @@
 import { Scene, GameObjects, Input } from 'phaser';
+import { v4 as uuidv4 } from 'uuid';
 
 type Item = {
   label: string;
@@ -21,6 +22,8 @@ function generateContextItems(
       onClick: () => {
         const obj = scene.add.image(spawnX, spawnY, 'logo');
         obj.setInteractive();
+        obj.setDataEnabled();
+        obj.data.set('id', uuidv4());
         scene.input.setDraggable(obj);
         manager.setState({ visible: false });
       }
@@ -30,6 +33,8 @@ function generateContextItems(
       onClick: () => {
         const obj = scene.add.sprite(spawnX, spawnY, 'logo');
         obj.setInteractive();
+        obj.setDataEnabled();
+        obj.data.set('id', uuidv4());
         scene.input.setDraggable(obj);
         manager.setState({ visible: false });
       }
@@ -39,6 +44,8 @@ function generateContextItems(
       onClick: () => {
         const obj = scene.add.tileSprite(spawnX, spawnY, 100, 100, 'logo');
         obj.setInteractive();
+        obj.setDataEnabled();
+        obj.data.set('id', uuidv4());
         scene.input.setDraggable(obj);
         manager.setState({ visible: false });
       }
@@ -48,6 +55,8 @@ function generateContextItems(
       onClick: () => {
         const obj = scene.add.bitmapText(spawnX, spawnY, '', 'Phas3r is cool');
         obj.setInteractive();
+        obj.setDataEnabled();
+        obj.data.set('id', uuidv4());
         scene.input.setDraggable(obj);
         manager.setState({ visible: false });
       }
@@ -57,6 +66,8 @@ function generateContextItems(
       onClick: () => {
         const obj = scene.add.text(spawnX, spawnY, 'Phas3r is cool');
         obj.setInteractive();
+        obj.setDataEnabled();
+        obj.data.set('id', uuidv4());
         scene.input.setDraggable(obj);
         manager.setState({ visible: false });
       }

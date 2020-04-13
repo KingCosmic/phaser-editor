@@ -4,17 +4,21 @@ import fs from 'fs';
 import { ContextMenu } from '../../components/ContextMenu';
 
 import generateContextItems from '../helpers/generateContextItems';
+import { saveFile } from '../../helpers/files';
 
 // TODO: make object when clicked update inspector
 
 type Entity = {
+  type: string;
+  id: string;
   x: number;
   y: number;
-  type: string;
-  texture: string;
+  texture?: string;
+  text?: string;
 };
 
 type Data = {
+  name: string;
   entities: Entity[];
 };
 
@@ -38,10 +42,18 @@ function createEditScene(scenePath: string) {
       this.input.mouse.disableContextMenu();
 
       for (let i = 0; i < data.entities.length; i += 1) {
-        const { texture, x, y } = data.entities[i];
+        const { type, text, texture, x, y, id } = data.entities[i];
 
-        const object = this.add.image(x, y, texture).setInteractive();
-        this.input.setDraggable(object);
+        let obj;
+
+        if (type === 'Image') obj = this.add.image(x, y, texture);
+        if (type === 'Sprite') obj = this.add.sprite(x, y, texture);
+        if (type === 'Text') obj = this.add.text(x, y, text);
+
+        obj?.setInteractive();
+        obj?.setDataEnabled();
+        obj?.data.set('id', id);
+        this.input.setDraggable(obj);
       }
 
       this.input.topOnly = true;
@@ -95,6 +107,36 @@ function createEditScene(scenePath: string) {
         } else if (contextMenu.state.visible) {
           contextMenu.setState({ visible: false });
         }
+      });
+
+      this.input.keyboard.on('keydown-S', (event: KeyboardEvent) => {
+        if (!event.ctrlKey) return;
+
+        const children = this.children.getChildren().map(child => {
+          const childData: Entity = {
+            id: child.getData('id'),
+            x: child.x,
+            y: child.y,
+            type: child.type
+          };
+
+          if (['Sprite', 'Image'].includes(child.type)) {
+            childData.texture = child.texture.key;
+          }
+
+          if (['Text'].includes(child.type)) {
+            childData.text = child.text;
+          }
+
+          return childData;
+        });
+
+        const newData: Data = {
+          name: data.name,
+          entities: children
+        };
+
+        saveFile(scenePath, newData);
       });
     }
   };
