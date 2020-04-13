@@ -12,7 +12,8 @@ function EditorTabs({ editors }: Props) {
   return (
     <div
       style={{
-        display: 'flex'
+        display: 'flex',
+        height: '41px'
       }}
     >
       {editors.map(editor => {

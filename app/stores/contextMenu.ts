@@ -1,14 +1,16 @@
 import { useState } from 'react';
 import { createContainer } from 'unstated-next';
 
+export type Item = {
+  label: string;
+  color?: string;
+  onClick(): void;
+};
+
 type State = {
   x: number;
   y: number;
-  items: Array<{
-    label: string;
-    color?: string;
-    onClick(): void;
-  }>;
+  items: Item[];
   visible: boolean;
 };
 

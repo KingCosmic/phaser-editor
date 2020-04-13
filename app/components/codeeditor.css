@@ -1,2 +1,4 @@
-@import '../../node_modules/codemirror/lib/codemirror.css';
-@import '../../node_modules/codemirror/theme/material.css';
+
+.container {
+  height: calc(100% - 41px);
+}

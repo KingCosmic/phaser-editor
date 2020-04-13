@@ -56,12 +56,12 @@ export function deleteFolder(path: string): void {
 export type File = {
   name: string;
   path: string;
-  directory?: Array<File>;
+  directory?: File[];
 };
 
 // eslint-disable-next-line consistent-return
 export const mapDirectory = function recursiveWalk(dir: string) {
-  const results: Array<File> = [];
+  const results: File[] = [];
 
   const files = fs.readdirSync(dir, { withFileTypes: true });
   let pending = files.length;
@@ -132,10 +132,30 @@ export function createProject(config: Config): boolean {
     Path.join(__dirname, 'templates/gameConfig.ts'),
     Path.join(config.filePath, 'gameConfig.ts')
   );
+  // copy over our only asset
+  fs.copyFileSync(
+    Path.join(__dirname, 'templates/assets/phaser3-logo.png'),
+    Path.join(config.filePath, 'assets', 'phaser3-logo.png')
+  );
   // we'll also make our preloader scene file. it handles asset loading.
   fs.copyFileSync(
     Path.join(__dirname, 'templates/scenes/preload.ts'),
     Path.join(config.filePath, 'scenes', 'preload.ts')
+  );
+  // we need to add our base scene just to have one.
+  fs.copyFileSync(
+    Path.join(__dirname, 'templates/scenes/scene1.ts'),
+    Path.join(config.filePath, 'scenes', 'scene1.ts')
+  );
+  // as well as our scene file for visual editing
+  fs.copyFileSync(
+    Path.join(__dirname, 'templates/scenes/scene1.scene'),
+    Path.join(config.filePath, 'scenes', 'scene1.scene')
+  );
+  // and add pack.json
+  fs.copyFileSync(
+    Path.join(__dirname, 'templates/pack.json'),
+    Path.join(config.filePath, 'pack.json')
   );
 
   return true;

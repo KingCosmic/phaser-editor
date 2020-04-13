@@ -21,7 +21,7 @@ const store = new Store({
   // We'll call our data file 'user-preferences'
   configName: 'user-preferences',
   defaults: {
-    // 800x600 is the default size of our window
+    // 1024x728 is the default size of our window
     windowBounds: { width: 1024, height: 728 }
   }
 });

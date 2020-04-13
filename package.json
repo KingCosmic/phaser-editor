@@ -288,7 +288,8 @@
     "react-hot-loader": "^4.12.19",
     "react-router-dom": "^5.1.2",
     "source-map-support": "^0.5.16",
-    "unstated-next": "^1.1.0"
+    "unstated-next": "^1.1.0",
+    "uuid": "^7.0.3"
   },
   "devEngines": {
     "node": ">=7.x",

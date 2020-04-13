@@ -1,4 +1,11 @@
-import React, { Component } from 'react';
+import React, { useEffect } from 'react';
+import Phaser from 'phaser';
+
+import { Renderer } from 'phaser3-react';
+
+import Store from '../stores/project';
+
+import generateConfig from '../phaser/config';
 
 import { Editor } from '../stores/editor';
 
@@ -6,26 +13,20 @@ type Props = {
   data: Editor;
 };
 
-type State = {
-  data: object;
-};
+function SceneEditor({ data }: Props) {
+  const { currentProject } = Store.useContainer();
 
-class SceneEditor extends Component<Props, State> {
-  constructor(props: Props) {
-    super(props);
-
-    this.state = {
-
-    };
-  }
-
-  render() {
-    return (
-      <div>
-
-      </div>
+  useEffect(() => {
+    const game = new Phaser.Game(
+      generateConfig(currentProject.filePath, data.path)
     );
-  }
+  });
+
+  return (
+    <div style={{ height: 'calc(100% - 41px)' }} id="game-container">
+      <Renderer />
+    </div>
+  );
 }
 
 export default SceneEditor;

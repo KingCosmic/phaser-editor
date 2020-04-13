@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 
 import styles from './contextmenu.css';
 
-import Store from '../stores/contextMenu';
+import Store, { Item } from '../stores/contextMenu';
 
 const emptyState = {
   visible: false,
@@ -17,17 +17,17 @@ type Data = {
     color?: string;
     onClick(): void;
   };
-  setContext(state: object): void;
+  setState(state: object): void;
 };
 
-function Item({ data, setContext }: Data) {
+function ContextItem({ data, setState }: Data) {
   return (
     <div
       role="presentation"
       className={styles.item}
       onClick={() => {
         data.onClick();
-        setContext(emptyState);
+        setState(emptyState);
       }}
       style={{ color: data.color ? data.color : '#b9bbbe' }}
     >
@@ -36,12 +36,20 @@ function Item({ data, setContext }: Data) {
   );
 }
 
-function ContextMenu() {
-  const { state, setState } = Store.useContainer();
+type Props = {
+  visible: boolean;
+  x: number;
+  y: number;
+  items: Item[];
+  setState?(state: object): void;
+};
+
+export function ContextMenu(props: Props) {
+  const { visible, x, y, items, setState = () => {} } = props;
 
   useEffect(() => {
     document.addEventListener('click', () => {
-      if (!state.visible) return;
+      if (!visible) return;
 
       setState(emptyState);
     });
@@ -51,17 +59,31 @@ function ContextMenu() {
     <div
       className={styles.container}
       style={{
-        display: state.visible ? 'block' : 'none',
+        display: visible ? 'block' : 'none',
         position: 'absolute',
-        top: `${state.y}px`,
-        left: `${state.x + 5}px`
+        top: `${y}px`,
+        left: `${x + 5}px`
       }}
     >
-      {state.items.map(item => {
-        return <Item data={item} key={item.label} setContext={setState} />;
+      {items.map(item => {
+        return <ContextItem data={item} key={item.label} setState={setState} />;
       })}
     </div>
   );
 }
 
-export default ContextMenu;
+function StoreWrapper() {
+  const { state, setState } = Store.useContainer();
+
+  return (
+    <ContextMenu
+      visible={state.visible}
+      items={state.items}
+      x={state.x}
+      y={state.y}
+      setState={setState}
+    />
+  );
+}
+
+export default StoreWrapper;

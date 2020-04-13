@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import Store, { Project } from '../stores/projects';
+import Store, { Project } from '../stores/project';
 
 import Card from './ProjectCard';
 import CreateProject from './CreateProject';
@@ -18,9 +18,8 @@ function Projects({ setView }: Props) {
 
   return (
     <div className={styles.container}>
-      {projects.map((project: Project, index) => {
-        // eslint-disable-next-line react/no-array-index-key
-        return <Card key={index} project={project} setView={setView} />;
+      {projects.map((project: Project) => {
+        return <Card key={project.name} project={project} setView={setView} />;
       })}
       <div
         className={styles.button}

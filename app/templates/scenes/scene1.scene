@@ -1,0 +1,11 @@
+{
+  "name": "scene1",
+  "entities": [
+    {
+      "type": "sprite",
+      "texture": "logo",
+      "x": 400,
+      "y": 300
+    }
+  ]
+}

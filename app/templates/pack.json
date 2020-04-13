@@ -1,0 +1,17 @@
+{
+  "test1": {
+    "files": [
+      {
+        "type": "image",
+        "key": "logo",
+        "url": "assets/phaser3-logo.png"
+      }
+    ]
+  },
+  "meta": {
+    "generated": "1401380327373",
+    "app": "Phaser 3 Editor",
+    "url": "https://github.com/KingCosmic",
+    "version": "1.0"
+  }
+}
