@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 import { Scene } from 'phaser';
 
 class Scene1 extends Scene {
@@ -5,7 +6,13 @@ class Scene1 extends Scene {
     super('scene1');
   }
 
-  create() {}
+  _create() {
+    this.add.sprite(400, 300, 'logo');
+  }
+
+  create() {
+    this._create();
+  }
 
   update() {}
 }

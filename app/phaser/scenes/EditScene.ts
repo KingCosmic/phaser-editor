@@ -3,7 +3,7 @@ import fs from 'fs';
 
 import { ContextMenu } from '../../components/ContextMenu';
 
-import generateContextItems from '../helpers/generateContextItems';
+import { generateContextItems, generateSceneFile } from '../helpers';
 import { saveFile } from '../../helpers/files';
 
 // TODO: make object when clicked update inspector
@@ -121,11 +121,13 @@ function createEditScene(scenePath: string) {
           };
 
           if (['Sprite', 'Image'].includes(child.type)) {
-            childData.texture = child.texture.key;
+            const c = child as GameObjects.Image;
+            childData.texture = c.texture.key;
           }
 
           if (['Text'].includes(child.type)) {
-            childData.text = child.text;
+            const c = child as GameObjects.Text;
+            childData.text = c.text;
           }
 
           return childData;
@@ -136,6 +138,8 @@ function createEditScene(scenePath: string) {
           entities: children
         };
 
+        // TODO: add file generation code;
+        generateSceneFile(scenePath, newData);
         saveFile(scenePath, newData);
       });
     }

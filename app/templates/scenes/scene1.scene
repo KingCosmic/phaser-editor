@@ -2,7 +2,7 @@
   "name": "scene1",
   "entities": [
     {
-      "type": "sprite",
+      "type": "Sprite",
       "texture": "logo",
       "x": 400,
       "y": 300
