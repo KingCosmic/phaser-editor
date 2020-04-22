@@ -2,6 +2,7 @@ import { Scene, GameObjects, Input, Types } from 'phaser';
 import fs from 'fs';
 
 import { ContextMenu } from '../../components/ContextMenu';
+import Inspector from '../../components/Inspector';
 
 import { generateContextItems, generateSceneFile } from '../helpers';
 import { saveFile } from '../../helpers/files';
@@ -39,6 +40,10 @@ function createEditScene(scenePath: string) {
         x: 0,
         y: 0
       });
+      const inspector = this.add.reactDom(Inspector, {
+        type: 'scene',
+        data: this
+      });
       this.input.mouse.disableContextMenu();
 
       for (let i = 0; i < data.entities.length; i += 1) {
@@ -46,13 +51,15 @@ function createEditScene(scenePath: string) {
 
         let obj;
 
-        if (type === 'Image') obj = this.add.image(x, y, texture);
-        if (type === 'Sprite') obj = this.add.sprite(x, y, texture);
-        if (type === 'Text') obj = this.add.text(x, y, text);
+        if (type === 'Image') obj = this.add.image(x, y, texture as string);
+        if (type === 'Sprite') obj = this.add.sprite(x, y, texture as string);
+        if (type === 'Text') obj = this.add.text(x, y, text as string);
 
-        obj?.setInteractive();
-        obj?.setDataEnabled();
-        obj?.data.set('id', id);
+        obj = obj as GameObjects.Sprite | GameObjects.Image | GameObjects.Text;
+
+        obj.setInteractive();
+        obj.setDataEnabled();
+        obj.data.set('id', id);
         this.input.setDraggable(obj);
       }
 
@@ -88,8 +95,12 @@ function createEditScene(scenePath: string) {
                 gameobject
               )
             });
-          } else if (contextMenu.state.visible) {
-            contextMenu.setState({ visible: false });
+          } else if (pointer.leftButtonDown()) {
+            inspector.setState({ type: gameobject.type, data: gameobject });
+
+            if (contextMenu.state.visible) {
+              contextMenu.setState({ visible: false });
+            }
           }
 
           event.stopPropagation();
@@ -104,15 +115,20 @@ function createEditScene(scenePath: string) {
             y: pointer.event.clientY,
             items: generateContextItems(this, pointer, contextMenu)
           });
-        } else if (contextMenu.state.visible) {
-          contextMenu.setState({ visible: false });
+        } else if (pointer.leftButtonDown()) {
+          inspector.setState({ type: 'Scene', data: this });
+
+          if (contextMenu.state.visible) {
+            contextMenu.setState({ visible: false });
+          }
         }
       });
 
       this.input.keyboard.on('keydown-S', (event: KeyboardEvent) => {
         if (!event.ctrlKey) return;
 
-        const children = this.children.getChildren().map(child => {
+        const children = this.children.getChildren().map(Child => {
+          const child = Child as GameObjects.Sprite | GameObjects.Text;
           const childData: Entity = {
             id: child.getData('id'),
             x: child.x,
@@ -138,7 +154,6 @@ function createEditScene(scenePath: string) {
           entities: children
         };
 
-        // TODO: add file generation code;
         generateSceneFile(scenePath, newData);
         saveFile(scenePath, newData);
       });

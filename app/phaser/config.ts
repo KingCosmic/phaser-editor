@@ -15,7 +15,7 @@ function generateConfig(
     backgroundColor: '#000000',
     scene: [LoadScene(gamePath), EditScene(scenePath)],
     scale: {
-      width: '100%',
+      width: '85%',
       height: '100%'
     },
     plugins: {

@@ -23,7 +23,10 @@ function SceneEditor({ data }: Props) {
   });
 
   return (
-    <div style={{ height: 'calc(100% - 41px)' }} id="game-container">
+    <div
+      style={{ height: 'calc(100% - 41px)', display: 'flex' }}
+      id="game-container"
+    >
       <Renderer />
     </div>
   );

@@ -15,7 +15,6 @@ function Editor(props: Props) {
     <div className={styles.container}>
       <SideBar />
       <EditorManager />
-      <Inspector />
     </div>
   );
 }
