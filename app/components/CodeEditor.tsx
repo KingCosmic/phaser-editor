@@ -1,33 +1,26 @@
-import React from 'react';
-
-import 'codemirror/lib/codemirror.css';
-import 'codemirror/theme/material.css';
-import 'codemirror/theme/neat.css';
+import React, { useRef, useEffect, useLayoutEffect } from 'react';
+import CodeMirror from 'codemirror';
 import 'codemirror/mode/javascript/javascript';
-
-import { UnControlled as CodeMirror } from 'react-codemirror2';
+import 'codemirror/theme/material.css';
 
 import { Editor } from '../stores/editor';
-
-import styles from './codeeditor.css';
 
 type Props = {
   data: Editor;
 };
 
 function CodeEditor({ data }: Props) {
-  console.log(data);
-  return (
-    <CodeMirror
-      className={styles.container}
-      options={{
+  const codeEditor = useRef<HTMLTextAreaElement>(null);
+  useLayoutEffect(() => {
+    if (codeEditor.current) {
+      CodeMirror.fromTextArea(codeEditor.current, {
         mode: 'javascript',
-        theme: 'material',
-        lineNumbers: true
-      }}
-      onChange={(editor, data, value) => {}}
-    />
-  );
+        lineNumbers: true,
+        theme: 'material'
+      });
+    }
+  }, []);
+  return <textarea ref={codeEditor} />;
 }
 
 export default CodeEditor;
