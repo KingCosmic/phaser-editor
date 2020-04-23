@@ -273,6 +273,7 @@
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.13.0",
     "@hot-loader/react-dom": "^16.13.0",
+    "@types/shortid": "^0.0.29",
     "codemirror": "^5.52.2",
     "core-js": "^3.6.4",
     "devtron": "^1.4.0",
@@ -282,11 +283,13 @@
     "history": "^4.10.1",
     "phaser": "^3.22.0",
     "phaser3-react": "^1.0.16",
+    "random-id": "^1.0.3",
     "react": "^16.12.0",
     "react-codemirror2": "^7.1.0",
     "react-dom": "^16.12.0",
     "react-hot-loader": "^4.12.19",
     "react-router-dom": "^5.1.2",
+    "shortid": "^2.2.15",
     "source-map-support": "^0.5.16",
     "unstated-next": "^1.1.0",
     "uuid": "^7.0.3"

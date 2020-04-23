@@ -7,6 +7,10 @@
 @import '~codemirror/theme/neat.css';
 @import '~@fortawesome/fontawesome-free/css/all.css';
 
+.CodeMirror {
+  height: calc(100% - 41px);
+}
+
 body,
 #root {
   width: 100vw;

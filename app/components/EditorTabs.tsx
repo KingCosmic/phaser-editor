@@ -6,9 +6,11 @@ import { Editor } from '../stores/editor';
 
 type Props = {
   editors: Array<Editor>;
+  activeEditor: string;
+  setActive(id: string): void;
 };
 
-function EditorTabs({ editors }: Props) {
+function EditorTabs({ editors, setActive, activeEditor }: Props) {
   return (
     <div
       style={{
@@ -17,7 +19,14 @@ function EditorTabs({ editors }: Props) {
       }}
     >
       {editors.map(editor => {
-        return <Tab data={editor} key={editor.title} />;
+        return (
+          <Tab
+            data={editor}
+            key={editor.title}
+            setActive={setActive}
+            activeEditor={activeEditor}
+          />
+        );
       })}
     </div>
   );
